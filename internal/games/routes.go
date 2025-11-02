@@ -6,7 +6,6 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// RegisterRoutes registers the /games route and wires repository -> service -> handler
 // It expects the seed file to be at ./data/games_seed.json relative to the project root.
 func RegisterRoutes(app *fiber.App) error {
 	path := filepath.Join("data", "games_seed.json")

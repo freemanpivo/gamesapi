@@ -4,12 +4,10 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-// response wrapper
 type GamesResponse struct {
 	Data []Game `json:"data"`
 }
 
-// NewHandler constructs a Fiber handler with service injected
 func NewHandler(s *Service) *Handler {
 	return &Handler{service: s}
 }
@@ -19,7 +17,6 @@ type Handler struct {
 }
 
 func (h *Handler) List(c *fiber.Ctx) error {
-	// query params: name, platform, gender, subGender
 	name := c.Query("name", "")
 	platform := c.Query("platform", "")
 	gender := c.Query("gender", "")

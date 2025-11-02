@@ -8,12 +8,10 @@ import (
 	"strings"
 )
 
-// Repository loads data from a JSON file and provides read/filter methods
 type Repository struct {
 	store []Game
 }
 
-// NewRepositoryFromFile loads games from the provided JSON file path
 func NewRepositoryFromFile(path string) (*Repository, error) {
 	b, err := ioutil.ReadFile(filepath.Clean(path))
 	if err != nil {
@@ -33,7 +31,6 @@ func (r *Repository) ListAll() ([]Game, error) {
 	return out, nil
 }
 
-// Filtered: name => substring case-insensitive; others exact case-insensitive
 func (r *Repository) Filtered(name, platform, gender, subGender string) ([]Game, error) {
 	out := make([]Game, 0, len(r.store))
 	for _, g := range r.store {
@@ -59,12 +56,11 @@ func (r *Repository) Filtered(name, platform, gender, subGender string) ([]Game,
 		}
 		out = append(out, g)
 	}
-	// apply default ordering by rating (desc) before returning
+
 	sortByRatingDesc(out)
 	return out, nil
 }
 
-// sortByRatingDesc sorts the slice in-place: highest rating first
 func sortByRatingDesc(games []Game) {
 	sort.SliceStable(games, func(i, j int) bool {
 		return games[i].Rating > games[j].Rating

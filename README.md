@@ -104,8 +104,6 @@ Lista dos comandos principais (já disponíveis no `Makefile`):
 
 - O seed com 80 jogos está em `data/games_seed.json` e é versionado no repositório.
 - O serviço carrega esse arquivo ao iniciar; a aplicação espera encontrar `data/games_seed.json` no diretório de trabalho.
-- Se preferir embutir o seed no binário (sem depender de volume), podemos converter para `//go:embed`.
-
 
 ## Exemplo de requisição CURL (local)
 
