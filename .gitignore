@@ -1,0 +1,99 @@
+# ============================================
+# Go Build & Dependencies
+# ============================================
+
+/bin
+/bin/*
+/out
+/out/*
+/dist
+/dist/*
+/build
+/build/*
+/target
+/target/*
+/coverage
+/coverage.txt
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+vendor/
+*.log
+*.tmp
+*.out
+*.swp
+go.work
+go.work.sum
+
+# ============================================
+# Docker & Compose
+# ============================================
+
+.docker
+.dockerignore
+docker-compose.override.yml
+docker-compose.dev.yml
+*.bak
+*.old
+volumes/
+*.pid
+
+# ============================================
+# Environment & Config
+# ============================================
+
+.env
+.env.local
+.env.*.local
+*.secret
+*.key
+*.pem
+*.crt
+
+# ============================================
+# IDEs & Editors
+# ============================================
+
+.vscode/
+.history/
+*.code-workspace
+.idea/
+*.iml
+*.ipr
+*.iws
+*.sublime-project
+*.sublime-workspace
+*.tmproj
+.DS_Store
+Thumbs.db
+
+# ============================================
+# Logs & Runtime files
+# ============================================
+
+*.log
+logs/
+*.bak
+*.orig
+*.rej
+*.tmp
+*.swp
+
+# ============================================
+# Data (optional)
+# ============================================
+
+/data/*
+!/data/games_seed.json
+
+# ============================================
+# Tests & Reports
+# ============================================
+
+/coverage
+/coverage.xml
+/junit.xml
+/test-results/
