@@ -1,0 +1,149 @@
+openapi: 3.1.0
+info:
+  title: Games API
+  description: >-
+    API simples que retorna uma lista de jogos lidos de um seed JSON.
+    Todos os resultados são, por padrão, ordenados por `rating` em ordem decrescente.
+  version: "1.0.0"
+servers:
+  - url: http://localhost:3000
+    description: Server local (dev)
+
+paths:
+  /games:
+    get:
+      tags:
+        - games
+      summary: Lista jogos
+      description: >-
+        Retorna a lista de jogos. Suporta filtros opcionais:
+
+        - `name` (substring, case-insensitive)
+        
+        - `platform` (exato, case-insensitive)
+        
+        - `gender` (exato, case-insensitive)
+        
+        - `subGender` (exato, case-insensitive)
+
+        **Observação:** a resposta é automaticamente ordenada por `rating` (desc).
+      parameters:
+        - name: name
+          in: query
+          description: Busca por nome (substring, case-insensitive)
+          required: false
+          schema:
+            type: string
+        - name: platform
+          in: query
+          description: "Filtra por plataforma (ex: snes, ps1, n64, nes)"
+          required: false
+          schema:
+            type: string
+        - name: gender
+          in: query
+          description: "Filtra por gênero (ex: RPG, Action, Platform)"
+          required: false
+          schema:
+            type: string
+        - name: subGender
+          in: query
+          description: "Filtra por subgênero (ex: Adventure, JRPG)"          
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK — Lista de jogos filtrada (ordenada por rating desc)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GamesResponse'
+              examples:
+                sample:
+                  summary: Exemplo com um jogo
+                  value:
+                    data:
+                      - id: "01H1Z4Q0V1F2G3H4J5K6L7M8N"
+                        name: "Super Mario World"
+                        releaseDate: "1990-01-01"
+                        platform: "snes"
+                        gender: "Platform"
+                        subGender: "Adventure"
+                        rating: 9.0
+        '400':
+          description: Bad Request — parâmetros inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    Game:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ULID (predefinido no seed JSON)
+          example: "01H1Z4Q0V1F2G3H4J5K6L7M8N"
+        name:
+          type: string
+          description: Nome do jogo
+          example: "Super Mario World"
+        releaseDate:
+          type: string
+          format: date
+          description: Data de lançamento (YYYY-MM-DD)
+          example: "1990-01-01"
+        platform:
+          type: string
+          description: Plataforma do jogo
+          enum: [snes, ps1, n64, nes]
+          example: "snes"
+        gender:
+          type: string
+          description: Gênero principal do jogo
+          enum: [Action, RPG, Platform, Racing, Simulation, Sports, Fighting, Puzzle, Shooter, Strategy]
+          example: "Platform"
+        subGender:
+          type: string
+          description: Sub gênero do jogo
+          enum: [Adventure, JRPG, Action, Metroidvania, Kart, Horror, Stealth, Sci-Fi, Tactical RPG, Run and Gun, Beat 'em up, Flight, Skateboarding, Boxing, Water, WW2, Rail Shooter]
+          example: "Adventure"
+        rating:
+          type: number
+          format: float
+          description: Avaliação do jogo, número entre 0 e 10.
+          example: 9.0
+      required:
+        - id
+        - name
+        - releaseDate
+        - platform
+        - gender
+        - subGender
+        - rating
+
+    GamesResponse:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Game'
+      required:
+        - data
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "mensagem de erro"

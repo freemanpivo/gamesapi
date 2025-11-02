@@ -1,6 +1,5 @@
 package games
 
-// Service orchestrates business logic
 type Service struct {
 	repo *Repository
 }
