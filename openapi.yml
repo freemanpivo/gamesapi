@@ -83,6 +83,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /health:
+    get:
+      summary: Verifica o status da API
+      description: |
+        Retorna o status **UP** quando o arquivo `data/games_seed.json` está acessível pela aplicação.
+        Caso contrário, retorna **DOWN**.
+      operationId: healthCheck
+      tags:
+        - Health
+      responses:
+        '200':
+          description: Aplicação saudável (arquivo disponível)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+              examples:
+                up:
+                  summary: API saudável
+                  value:
+                    status: "UP"
+        '503':
+          description: Aplicação indisponível (arquivo ausente ou inacessível)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+              examples:
+                down:
+                  summary: API indisponível
+                  value:
+                    status: "DOWN"
+                    error: "stat data/games_seed.json: no such file or directory"
 
 components:
   schemas:
@@ -147,3 +180,28 @@ components:
         error:
           type: string
           example: "mensagem de erro"
+    
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+          enum: [UP, DOWN]
+          description: Estado de saúde da aplicação
+        error:
+          type: string
+          nullable: true
+          description: Mensagem de erro (presente apenas se DOWN)
+      example:
+        status: "UP"
+
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+        details:
+          type: string
+          nullable: true
+      example:
+        message: "Internal Server Error"
