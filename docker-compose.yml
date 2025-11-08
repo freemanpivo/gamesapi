@@ -1,26 +1,18 @@
-version: "3.8"
 
 services:
   games-api:
     build:
       context: .
       dockerfile: Dockerfile
-    image: games-api:local
-    container_name: games-api
+    image: gamesapi
+    container_name: gamesapi
     ports:
       - "3000:3000"
-    volumes:
-      - ./data:/app/data:ro
     restart: unless-stopped
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:3000/games || exit 1"]
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/health || exit 1"]
       interval: 10s
       timeout: 3s
       retries: 5
     environment:
       PORT: "3000"
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "10m"
-        max-file: "3"
