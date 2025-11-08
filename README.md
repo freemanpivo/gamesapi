@@ -7,36 +7,35 @@ Exemplo de API em Go organizanda por *feature folders*, usando Fiber. Dados de s
 
 - Go 1.21+
 - Docker & Docker Compose (se for usar containers)
-- make (opcional, recomendado)
+- make (opcional, mas recomendado)
 
 ## Estrutura do projeto
 
 ```
 games-api
-│   .dockerignore
-│   .gitignore
-│   docker-compose.yml
-│   Dockerfile
-│   go.mod
-│   go.sum
-│   main.go
-│   Makefile
-│   README.md
-│
-├───data
-│       games_seed.json
-│
-├───internal
-│   └───games
-│           handler.go
-│           model.go
-│           repository.go
-│           routes.go
-│           service.go
-│
-└───pkg
-    └───ulidutil
-            ulid.go
+├── cmd
+│   └── main.go
+├── data
+│   └── games_seed.json
+├── docker-compose.yml
+├── Dockerfile
+├── go.mod
+├── go.sum
+├── internal
+│   ├── games
+│   │   ├── handler.go
+│   │   ├── model.go
+│   │   ├── repository.go
+│   │   ├── routes.go
+│   │   └── service.go
+│   └── health
+│       └── health.go
+├── Makefile
+├── openapi.yml
+├── pkg
+│   └── ulidutil
+│       └── ulid.go
+└── README.md
 ```
 
 ## Como rodar (local, sem Docker)
@@ -49,8 +48,6 @@ make tidy
 2. Rodar localmente (usa `data/games_seed.json`):
 ```bash
 make run
-# ou
-go run main.go
 ```
 
 3. Build local do binário:
@@ -90,7 +87,8 @@ Lista dos comandos principais (já disponíveis no `Makefile`):
 - `make lint` — formata o código (`go fmt ./...`).
 
 **Docker related:**
-- `make docker-build` — builda a imagem Docker localmente.
+- `make docker-build` — builda a imagem Dockerfile.
+- `make docker-run` — roda a imagem via Dockerfile.
 - `make up` — `docker-compose up --build -d`.
 - `make down` — `docker-compose down`.
 - `make logs` — segue logs do serviço.
@@ -98,7 +96,7 @@ Lista dos comandos principais (já disponíveis no `Makefile`):
 - `make docker-clean` — remove containers/imagens criadas.
 
 **Utilitários:**
-- `make health` — `curl` no endpoint `GET /games` (usa `PORT` 3000 por padrão).
+- `make health` — `curl` no endpoint `GET /health` (usa `PORT` 3000 por padrão).
 
 ## Seed data
 
