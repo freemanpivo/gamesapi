@@ -8,15 +8,22 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/logger"
 
 	"github.com/freemanpivo/games-api/internal/games"
+	"github.com/freemanpivo/games-api/internal/health"
 )
 
-func main() {
+func NewApp() *fiber.App {
 	app := fiber.New()
 	app.Use(logger.New())
 	app.Use(cors.New())
 
-	// mount feature routes
+	health.RegisterRoutes(app)
 	games.RegisterRoutes(app)
+
+	return app
+}
+
+func main() {
+	app := NewApp()
 
 	if err := app.Listen(":3000"); err != nil {
 		log.Fatalf("failed to start: %v", err)
