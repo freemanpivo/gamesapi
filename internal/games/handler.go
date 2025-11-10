@@ -19,10 +19,10 @@ type Handler struct {
 func (h *Handler) List(c *fiber.Ctx) error {
 	name := c.Query("name", "")
 	platform := c.Query("platform", "")
-	gender := c.Query("gender", "")
-	subGender := c.Query("subGender", "")
+	genre := c.Query("genre", "")
+	subGenre := c.Query("subGenre", "")
 
-	games, err := h.service.GetGames(name, platform, gender, subGender)
+	games, err := h.service.GetGames(name, platform, genre, subGenre)
 	if err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{"error": err.Error()})
 	}

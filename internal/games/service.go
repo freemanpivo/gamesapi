@@ -8,10 +8,9 @@ func NewService(r *Repository) *Service {
 	return &Service{repo: r}
 }
 
-func (s *Service) GetGames(name, platform, gender, subGender string) ([]Game, error) {
-	// If no filters provided, return all
-	if name == "" && platform == "" && gender == "" && subGender == "" {
+func (s *Service) GetGames(name, platform, genre, subGenre string) ([]Game, error) {
+	if name == "" && platform == "" && genre == "" && subGenre == "" {
 		return s.repo.ListAll()
 	}
-	return s.repo.Filtered(name, platform, gender, subGender)
+	return s.repo.Filtered(name, platform, genre, subGenre)
 }

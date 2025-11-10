@@ -5,7 +5,7 @@ type Game struct {
 	Name        string  `json:"name"`
 	ReleaseDate string  `json:"releaseDate"` // In format YYYY-MM-DD
 	Platform    string  `json:"platform"`
-	Gender      string  `json:"gender"`
-	SubGender   string  `json:"subGender"`
+	Genre       string  `json:"genre"`
+	SubGenre    string  `json:"subGenre"`
 	Rating      float32 `json:"rating"`
 }

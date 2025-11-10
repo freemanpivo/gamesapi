@@ -108,7 +108,7 @@ Lista dos comandos principais (já disponíveis no `Makefile`):
 Você pode testar a API localmente (porta padrão 3000) com todos os parâmetros mockados:
 
 ```bash
-curl -X GET "http://localhost:3000/games?name=mario&platform=snes&gender=Platform&subGender=Adventure" \
+curl -X GET "http://localhost:3000/games?name=mario&platform=snes&genre=Platform&subGenre=Adventure" \
 -H "Accept: application/json" | jq
 ```
 
@@ -122,8 +122,8 @@ Exemplo de resposta:
             "name": "Super Mario World",
             "releaseDate": "1990-11-21",
             "platform": "snes",
-            "gender": "Platform",
-            "subGender": "Adventure",
+            "genre": "Platform",
+            "subGenre": "Adventure",
             "rating": 9.0
         }
     ]
@@ -134,8 +134,8 @@ Exemplo de resposta:
 Parâmetros de exemplo usados:
 - `name=mario` → busca por nome contendo "mario" (case-insensitive)
 - `platform=snes` → filtra apenas jogos de Super Nintendo
-- `gender=Platform` → gênero principal
-- `subGender=Adventure` → subgênero
+- `genre=Platform` → gênero principal
+- `subGenre=Adventure` → subgênero
 
 
 Todos os resultados vêm **ordenados por rating (desc)** por padrão.

@@ -22,9 +22,9 @@ paths:
         
         - `platform` (exato, case-insensitive)
         
-        - `gender` (exato, case-insensitive)
+        - `genre` (exato, case-insensitive)
         
-        - `subGender` (exato, case-insensitive)
+        - `subGenre` (exato, case-insensitive)
 
         **Observação:** a resposta é automaticamente ordenada por `rating` (desc).
       parameters:
@@ -40,13 +40,13 @@ paths:
           required: false
           schema:
             type: string
-        - name: gender
+        - name: genre
           in: query
           description: "Filtra por gênero (ex: RPG, Action, Platform)"
           required: false
           schema:
             type: string
-        - name: subGender
+        - name: subGenre
           in: query
           description: "Filtra por subgênero (ex: Adventure, JRPG)"          
           required: false
@@ -68,8 +68,8 @@ paths:
                         name: "Super Mario World"
                         releaseDate: "1990-01-01"
                         platform: "snes"
-                        gender: "Platform"
-                        subGender: "Adventure"
+                        genre: "Platform"
+                        subGenre: "Adventure"
                         rating: 9.0
         '400':
           description: Bad Request — parâmetros inválidos
@@ -140,12 +140,12 @@ components:
           description: Plataforma do jogo
           enum: [snes, ps1, n64, nes]
           example: "snes"
-        gender:
+        genre:
           type: string
           description: Gênero principal do jogo
           enum: [Action, RPG, Platform, Racing, Simulation, Sports, Fighting, Puzzle, Shooter, Strategy]
           example: "Platform"
-        subGender:
+        subGenre:
           type: string
           description: Sub gênero do jogo
           enum: [Adventure, JRPG, Action, Metroidvania, Kart, Horror, Stealth, Sci-Fi, Tactical RPG, Run and Gun, Beat 'em up, Flight, Skateboarding, Boxing, Water, WW2, Rail Shooter]
@@ -160,8 +160,8 @@ components:
         - name
         - releaseDate
         - platform
-        - gender
-        - subGender
+        - genre
+        - subGenre
         - rating
 
     GamesResponse:
@@ -190,7 +190,6 @@ components:
           description: Estado de saúde da aplicação
         error:
           type: string
-          nullable: true
           description: Mensagem de erro (presente apenas se DOWN)
       example:
         status: "UP"
@@ -202,6 +201,5 @@ components:
           type: string
         details:
           type: string
-          nullable: true
       example:
         message: "Internal Server Error"

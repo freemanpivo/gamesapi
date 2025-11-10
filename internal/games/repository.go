@@ -45,12 +45,12 @@ func (r *Repository) Filtered(name, platform, gender, subGender string) ([]Game,
 			}
 		}
 		if gender != "" {
-			if !strings.EqualFold(g.Gender, gender) {
+			if !strings.EqualFold(g.Genre, gender) {
 				continue
 			}
 		}
 		if subGender != "" {
-			if !strings.EqualFold(g.SubGender, subGender) {
+			if !strings.EqualFold(g.SubGenre, subGender) {
 				continue
 			}
 		}
