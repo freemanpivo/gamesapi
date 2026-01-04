@@ -23,6 +23,11 @@ func NewApp() *fiber.App {
 }
 
 func main() {
+	// load config files;
+	// load databases;
+	// create server;
+	// create base route;
+	// register usecase routes;
 	app := NewApp()
 
 	if err := app.Listen(":3000"); err != nil {
