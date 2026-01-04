@@ -1,6 +1,6 @@
 # games-api
 
-Exemplo de API em Go organizanda por *feature folders*, usando Fiber. Dados de seed (80 jogos) são lidos de `data/games_seed.json`.
+Exemplo de API em Go organizanda por *feature folders*, usando Fiber. Dados de seed (80 jogos) são lidos de `app/data/games_seed.json`.
 
 
 ## Requisitos
