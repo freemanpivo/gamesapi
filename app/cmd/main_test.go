@@ -4,10 +4,12 @@ import (
 	"encoding/json"
 	"net/http/httptest"
 	"testing"
+
+	"github.com/freemanpivo/games-api/internal/server"
 )
 
 func TestNewApp_RoutesRegistered(t *testing.T) {
-	app := NewApp()
+	app := server.Start()
 
 	req := httptest.NewRequest("GET", "/health", nil)
 	resp, err := app.Test(req, -1)
