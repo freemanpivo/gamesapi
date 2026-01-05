@@ -1,0 +1,7 @@
+features:
+  enableNewHome: true
+  enableBetaSearch: false
+  enableAsyncProcessing: true
+
+limits:
+  maxGamesPerUser: 10
