@@ -1,0 +1,35 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Debug Games API",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "program": "${workspaceFolder}/bin/gamesapi",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "APP_ENV": "local",
+        "CONFIG_PATH": "${workspaceFolder}/configs",
+        "SERVER_PORT": "3000"
+      },
+      "args": [],
+      "showLog": true
+    },
+    {
+      "name": "Run Games API",
+      "type": "go",
+      "request": "launch",
+      "mode": "exec",
+      "program": "${workspaceFolder}/bin/gamesapi",
+      "cwd": "${workspaceFolder}",
+      "env": {
+        "APP_ENV": "local",
+        "CONFIG_PATH": "${workspaceFolder}/configs",
+        "SERVER_PORT": "3000"
+      },
+      "args": [],
+      "showLog": true
+    }
+  ]
+}
