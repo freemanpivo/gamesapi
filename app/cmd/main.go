@@ -3,34 +3,27 @@ package main
 import (
 	"log"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/cors"
-	"github.com/gofiber/fiber/v2/middleware/logger"
-
-	"github.com/freemanpivo/games-api/internal/games"
-	"github.com/freemanpivo/games-api/internal/health"
+	"github.com/freemanpivo/games-api/internal/config"
+	"github.com/freemanpivo/games-api/internal/server"
 )
-
-func NewApp() *fiber.App {
-	app := fiber.New()
-	app.Use(logger.New())
-	app.Use(cors.New())
-
-	health.RegisterRoutes(app)
-	games.RegisterRoutes(app)
-
-	return app
-}
 
 func main() {
 	// load config files;
-	// load databases;
-	// create server;
-	// create base route;
-	// register usecase routes;
-	app := NewApp()
-
-	if err := app.Listen(":3000"); err != nil {
-		log.Fatalf("failed to start: %v", err)
+	cfg, err := config.AppSettings()
+	if err != nil {
+		log.Fatalf("failed to load config: %v", err)
 	}
+	log.Printf("starting %s on port %d", cfg.App.Name, cfg.Server.Port)
+
+	_, err = config.AppFeatures()
+	if err != nil {
+		log.Fatalf("failed to load feature flags: %v", err)
+	}
+	log.Printf("FUNC Limiting user games by %d", config.Limit("maxGamesPerUser", 0))
+	// load databases;
+
+	// create server;
+	server.Start()
+	// create base route;
+
 }
